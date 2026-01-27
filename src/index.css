@@ -1,0 +1,256 @@
+:root {
+  --bg-deep: #050511;
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-glass-heavy: rgba(10, 10, 20, 0.8);
+
+  --accent-neon-pink: #f472b6;
+  /* Pink-400 */
+  --accent-neon-blue: #38bdf8;
+  /* Sky-400 */
+  --accent-neon-purple: #c084fc;
+  /* Purple-400 */
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+
+  --blob-1: #ff0080;
+  --blob-2: #7928ca;
+  --blob-3: #0070f3;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-deep);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-deep) url('./assets/la_sandimas_bg.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Gradients/Blobs */
+.ambient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* Above BG, below content */
+  overflow: hidden;
+  filter: blur(80px);
+  opacity: 0.4;
+  /* Lower opacity to see city */
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 20s infinite alternate;
+}
+
+.blob:nth-child(1) {
+  top: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: var(--blob-1);
+  animation-delay: -5s;
+}
+
+.blob:nth-child(2) {
+  bottom: -10%;
+  left: -20%;
+  width: 70vw;
+  height: 70vw;
+  background: var(--blob-2);
+  animation-delay: 0s;
+}
+
+.blob:nth-child(3) {
+  top: 40%;
+  left: 40%;
+  width: 40vw;
+  height: 40vw;
+  background: var(--blob-3);
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* Layout */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #ccc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.status-badge.live {
+  border-color: var(--accent-neon-pink);
+  color: var(--accent-neon-pink);
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.2);
+}
+
+.visualizer-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.controls-area {
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: 10;
+}
+
+/* Glass Buttons */
+.btn-control {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-control:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-control:active {
+  transform: scale(0.95);
+}
+
+.btn-main {
+  width: 80px;
+  height: 80px;
+  background: #ef4444;
+  /* Red-500 */
+  color: white;
+}
+
+.btn-main:hover {
+  background: #dc2626;
+  /* Red-600 */
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger {
+  background: #ef4444;
+  /* Red-500 */
+  border-color: #ef4444;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.error-banner {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(239, 68, 68, 0.9);
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  text-align: center;
+  z-index: 100;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
