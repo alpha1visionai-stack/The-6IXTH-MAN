@@ -5,7 +5,7 @@
 
 import { AudioRecorder, AudioStreamer } from './audio-utils';
 
-const WS_URL = "wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent";
+const WS_URL = "wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent";
 
 export class LiveClient {
     constructor(apiKey, model, voice, knowledge) {
